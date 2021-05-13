@@ -51,7 +51,7 @@ interface IFooter {
   SquareDisplayData: any[];
   artist;
   style?: React.CSSProperties;
-  hasFavorite: boolean;
+  hasFavorite?: boolean;
 }
 
 const Footer: React.FC<IFooter> = ({

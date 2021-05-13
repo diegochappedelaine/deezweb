@@ -91,3 +91,14 @@ export interface ITrack {
   album: IAlbum;
   type: "track";
 }
+
+export interface IFavoritesTracks {
+  title: string;
+  artistName: string;
+  link: string;
+  cover: string;
+  trackId: number;
+  artistId: number;
+  albumId: number;
+  albumName: string;
+}

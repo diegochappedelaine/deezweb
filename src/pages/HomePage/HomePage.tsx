@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
-import fetchData from "helpers/fetchData";
+import fetchData from "helpers/useFetchLazy";
 import {
   useInnerWidth,
   generateArrayOfPairedBoolean,

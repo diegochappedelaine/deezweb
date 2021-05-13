@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const corsProxyUrl = "https://mycorsproxyapp.herokuapp.com/";
 
-function useFetch<T = unknown>(url: string) {
+function useFetchLazy<T = unknown>(url: string) {
   const [error, setError] = useState();
   const [loading, setLoading] = useState<boolean>(false);
   const [data, setData] = useState<T>();
@@ -22,4 +22,4 @@ function useFetch<T = unknown>(url: string) {
   return { error, loading, data, fetchInfo };
 }
 
-export default useFetch;
+export default useFetchLazy;
