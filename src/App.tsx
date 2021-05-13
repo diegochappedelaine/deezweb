@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Switch, Route, useLocation } from "react-router-dom";
 
-function App() {
+import {
+  HomePage,
+  AlbumPage,
+  ArtistPage,
+  TrackPage,
+  NotFoundPage,
+  FavoritesPage,
+} from "pages";
+import "styles/App.scss";
+
+const App = () => {
+  const location = useLocation();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Switch location={location} key={location.pathname}>
+      <Route path="/favorites" component={FavoritesPage} exact />
+      <Route path="/artist/:id" component={ArtistPage} exact />
+      <Route path="/album/:id" component={AlbumPage} exact />
+      <Route path="/track/:id" component={TrackPage} exact />
+      <Route path="/404" component={NotFoundPage} exact />
+      <Route path="/" component={HomePage} exact />
+      <Route component={NotFoundPage} />
+    </Switch>
   );
-}
+};
 
 export default App;
