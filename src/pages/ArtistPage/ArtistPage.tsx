@@ -6,7 +6,7 @@ import useFetch from "helpers/useFetch";
 import { usePalette } from "react-palette";
 import { useAppContext } from "provider/AppProvider";
 
-import NavBar from "components/NavBar";
+import FadeIn from "components/FadeIn";
 import AlbumCover from "components/AlbumCover";
 import { DeezerButton } from "components/Buttons";
 import Footer from "components/Footer";
@@ -78,27 +78,28 @@ const ArtistPage: React.FC = () => {
   return (
     <Layout>
       <Container>
-        <NavBar />
-        <Title>{artistName}</Title>
-        <DiscographyContainer>
-          {albums &&
-            albums.map(({ title, cover_big, id: albumId }, index) => (
-              <AlbumContainer
-                key={index}
-                onClick={() => history.push(`/album/${albumId}`)}
-              >
-                <h2>
-                  {artistName} - {title}
-                </h2>
-                <AlbumCover
-                  albumWrapperColor={albumWrapperColor}
-                  albumCover={cover_big}
-                  albumTitle={title}
-                />
-              </AlbumContainer>
-            ))}
-        </DiscographyContainer>
-        <DeezerButton style={{ margin: "0 auto 300px" }} link={link} />
+        <FadeIn>
+          <Title>{artistName}</Title>
+          <DiscographyContainer>
+            {albums &&
+              albums.map(({ title, cover_big, id: albumId }, index) => (
+                <AlbumContainer
+                  key={index}
+                  onClick={() => history.push(`/album/${albumId}`)}
+                >
+                  <h2>
+                    {artistName} - {title}
+                  </h2>
+                  <AlbumCover
+                    albumWrapperColor={albumWrapperColor}
+                    albumCover={cover_big}
+                    albumTitle={title}
+                  />
+                </AlbumContainer>
+              ))}
+          </DiscographyContainer>
+          <DeezerButton style={{ margin: "0 auto 300px" }} link={link} />
+        </FadeIn>
       </Container>
       <Footer
         SquareDisplayData={SquareDisplayData}

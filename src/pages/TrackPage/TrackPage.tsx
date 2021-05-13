@@ -8,8 +8,8 @@ import { formatTime, useInnerWidth } from "utils";
 import { usePalette } from "react-palette";
 import { isFavorite, handleFavorites } from "helpers/handleFavorites";
 
+import FadeIn from "components/FadeIn";
 import AlbumCover from "components/AlbumCover";
-import NavBar from "components/NavBar";
 import Footer from "components/Footer";
 import { DeezerButton, RemoveFavoriteButton } from "components/Buttons";
 import {
@@ -24,8 +24,7 @@ import "react-h5-audio-player/src/styles.scss";
 import { ITrack } from "index.d";
 
 const Layout = styled.div`
-  width: 100vw;
-  min-height: 100vh;
+  width: 100%;
   height: 100%;
 `;
 
@@ -84,49 +83,49 @@ const TrackPage: React.FC = () => {
   return (
     <Layout>
       <Container>
-        <NavBar style={{ marginBottom: 64 }} />
-        <Wrapper>
-          <AlbumCover
-            albumWrapperColor={albumWrapperColor}
-            albumCover={albumCover!}
-            albumTitle={albumTitle}
-          />
-          <InformationsWrapper>
-            <h1>
-              <span>Album: </span>
-              <span onClick={() => history.push(`/album/${albumId}`)}>
-                {albumTitle}
-              </span>
-            </h1>
-            <p>
-              <span>Arstist: </span>
-              <span onClick={() => history.push(`/artist/${artistId}`)}>
-                {artistName}
-              </span>
-            </p>
+        <FadeIn style={{ marginTop: 64 }}>
+          <Wrapper>
+            <AlbumCover
+              albumWrapperColor={albumWrapperColor}
+              albumCover={albumCover!}
+              albumTitle={albumTitle}
+            />
+            <InformationsWrapper>
+              <h1>
+                <span>Album: </span>
+                <span onClick={() => history.push(`/album/${albumId}`)}>
+                  {albumTitle}
+                </span>
+              </h1>
+              <p>
+                <span>Arstist: </span>
+                <span onClick={() => history.push(`/artist/${artistId}`)}>
+                  {artistName}
+                </span>
+              </p>
 
-            <h3>
-              <span>Title: </span>
-              <span>{trackTitle}</span>
-            </h3>
-            <AudioPlayer src={previewListenUrl} showSkipControls={false} />
-            <ButtonContainer>
-              {innerWidth <= 900 && (
-                <RemoveFavoriteButton
-                  onClick={() => {
-                    handleFavorites(id);
-                    setTrackIsFavorite(!trackIsFavorite);
-                  }}
-                >
-                  {trackIsFavorite ? "Remove favorite" : "Add favorite"}
-                </RemoveFavoriteButton>
-              )}
-              <DeezerButton link={link} />
-            </ButtonContainer>
-          </InformationsWrapper>
-        </Wrapper>
+              <h3>
+                <span>Title: </span>
+                <span>{trackTitle}</span>
+              </h3>
+              <AudioPlayer src={previewListenUrl} showSkipControls={false} />
+              <ButtonContainer>
+                {innerWidth <= 900 && (
+                  <RemoveFavoriteButton
+                    onClick={() => {
+                      handleFavorites(id);
+                      setTrackIsFavorite(!trackIsFavorite);
+                    }}
+                  >
+                    {trackIsFavorite ? "Remove favorite" : "Add favorite"}
+                  </RemoveFavoriteButton>
+                )}
+                <DeezerButton link={link} />
+              </ButtonContainer>
+            </InformationsWrapper>
+          </Wrapper>
+        </FadeIn>
       </Container>
-
       <Footer
         SquareDisplayData={SquareDisplayData}
         artist={{ artistPicture, artistId, artistName }}

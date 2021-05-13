@@ -6,7 +6,6 @@ import { IFavoritesTracks } from "index.d";
 import useFetchFavorites from "helpers/useFetchFavorites";
 import { handleFavorites } from "helpers/handleFavorites";
 
-import NavBar from "components/NavBar";
 import FavoriteTrack from "components/FavoriteTrack";
 
 const Layout = styled.div`
@@ -68,7 +67,6 @@ const FavoritesPage: React.FC = () => {
   return (
     <Layout>
       <Container>
-        <NavBar />
         <ul>
           {favorites.map((track, index) => (
             <FavoriteTrack

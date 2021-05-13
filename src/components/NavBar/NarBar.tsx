@@ -6,7 +6,7 @@ const H1 = styled.h1`
   font-weight: 500;
   font-size: 3rem;
   color: white;
-  transition: 0.2s all ease;
+  transition: 0.2s text-shadow ease;
   text-shadow: 3px 3px rgba(0, 0, 0, 0.3);
 
   @media (max-width: 900px) {
@@ -25,7 +25,7 @@ const ALink = styled.a`
   text-decoration: none;
   margin-left: 16px;
   text-shadow: 3px 3px rgba(0, 0, 0, 0.3);
-  transition: 0.2s all ease;
+  transition: 0.2s text-shadow ease;
 
   @media (max-width: 900px) {
     font-size: 1.4rem;
@@ -39,8 +39,8 @@ const ALink = styled.a`
 
 const Nav = styled.nav`
   display: flex;
-  align-items: center;
-  margin-bottom: 16px;
+  background: none;
+  border: none;
 `;
 
 const NavItems = [
@@ -48,10 +48,13 @@ const NavItems = [
   { label: "favorites", href: "/favorites" },
 ];
 
-const NavBar: React.FC<{ style?: React.CSSProperties }> = ({ style }) => {
+const NavBar: React.FC<{ style?: React.CSSProperties; className?: string }> = ({
+  style,
+  className,
+}) => {
   const history = useHistory();
   return (
-    <Nav style={style}>
+    <Nav style={style} className={className}>
       <H1 onClick={() => history.push("/")}>deez . web</H1>
       <ul style={{ display: "flex", marginLeft: "auto" }}>
         {NavItems.map(({ label, href }, index) => (

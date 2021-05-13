@@ -16,6 +16,28 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
+h2 {
+  font-weight: 700;
+  font-size: 3rem;
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
+}
+
+h3 {
+  font-weight: 500;
+  font-size: 2.4rem;
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
+}
+
+p {
+  font-size: 1.5rem;
+}
+
 .rhap_container {
   border-radius: 16px;
 }

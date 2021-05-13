@@ -7,26 +7,23 @@ import { formatTime } from "utils";
 import useFetch from "helpers/useFetch";
 import { useAppContext } from "provider/AppProvider";
 
+import FadeIn from "components/FadeIn";
 import TrackList from "components/TrackList/TrackList";
-import NavBar from "components/NavBar";
 import AlbumCover from "components/AlbumCover/AlbumCover";
 import Footer from "components/Footer/Footer";
 
 import { IAlbum } from "index.d";
 
 const Container = styled.div`
-  width: 100vw;
-  min-height: 100vh;
   height: 100%;
   display: flex;
-  box-shadow: 0 0 3px 0 rgb(0 0 0 / 20%);
 `;
 
 const MainWrapper = styled.div`
   display: flex;
   padding: 0 24px;
   width: 100%;
-  margin-top: 100px;
+  margin-top: 24px;
   justify-content: space-around;
 
   @media (max-width: 900px) {
@@ -111,34 +108,29 @@ const AlbumPage: React.FC = () => {
   return (
     <Container>
       <MainWrapper>
-        <NavBar
-          style={{
-            position: "absolute",
-            top: 30,
-            maxWidth: "80vw",
-            width: "100%",
-          }}
-        />
         <div>
-          <Title style={{ fontWeight: 500 }}>{albumTitle}</Title>
-          <Title
-            style={{ fontWeight: 300, color: "#f7f7f7" }}
-            onClick={() => history.push(`/artist/${artistId}`)}
-          >
-            {artistName}
-          </Title>
-          <AlbumCover
-            albumWrapperColor={albumWrapperColor}
-            albumCover={albumCover!}
-            albumTitle={albumTitle}
-          />
+          <FadeIn>
+            <Title style={{ fontWeight: 500 }}>{albumTitle}</Title>
+            <Title
+              style={{ fontWeight: 300, color: "#f7f7f7" }}
+              onClick={() => history.push(`/artist/${artistId}`)}
+            >
+              {artistName}
+            </Title>
+            <AlbumCover
+              albumWrapperColor={albumWrapperColor}
+              albumCover={albumCover!}
+              albumTitle={albumTitle}
+            />
+          </FadeIn>
         </div>
-
-        <TrackList
-          tracklist={tracklist}
-          backgroundColor={trackListColor!}
-          link={link}
-        />
+        <FadeIn>
+          <TrackList
+            tracklist={tracklist}
+            backgroundColor={trackListColor!}
+            link={link}
+          />
+        </FadeIn>
       </MainWrapper>
       <Footer
         SquareDisplayData={SquareDisplayData}
