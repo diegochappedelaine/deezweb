@@ -12,7 +12,6 @@ import FavoriteTrack from "components/FavoriteTrack";
 const Layout = styled.div`
   width: 100vw;
   min-height: 100vh;
-  background: #2e6b71;
 `;
 
 const Container = styled.section`

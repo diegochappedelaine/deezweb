@@ -1,8 +1,10 @@
+import { useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import styled from "styled-components";
 
 import useFetch from "helpers/useFetch";
 import { usePalette } from "react-palette";
+import { useAppContext } from "provider/AppProvider";
 
 import NavBar from "components/NavBar";
 import AlbumCover from "components/AlbumCover";
@@ -17,15 +19,15 @@ import {
 
 import { IArtist, IAlbum } from "index.d";
 
-const Layout = styled.div<{ backgroundColor: string }>`
+const Layout = styled.div`
   width: 100vw;
   min-height: 100vh;
-  background: ${({ backgroundColor }) => backgroundColor};
 `;
 
 const ArtistPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const history = useHistory();
+  const { setLoadingBackgroundColor, loadingBackgroundColor } = useAppContext();
 
   const { data: artist, loading: artistLoading } = useFetch<IArtist>(
     `https://api.deezer.com/artist/${id}`
@@ -43,6 +45,19 @@ const ArtistPage: React.FC = () => {
     error,
   } = usePalette(artistPicture || "#FFFFFF");
 
+  useEffect(() => {
+    if (!loading) {
+      if (backgroundColor) {
+        setLoadingBackgroundColor!(backgroundColor!);
+        console.log(backgroundColor);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loading]);
+
+  const backgroundColor = error ? loadingBackgroundColor : colorData.lightMuted,
+    albumWrapperColor = error ? "lightgrey" : colorData.lightVibrant;
+
   if (loading || !artist || albumsLoading || artistLoading || !albumsData)
     return null;
 
@@ -54,19 +69,14 @@ const ArtistPage: React.FC = () => {
     fans = artist.nb_fan,
     link = artist.link;
 
-  const backgroundColor = error ? "#181201" : colorData.lightMuted,
-    albumWrapperColor = error ? "lightgrey" : colorData.lightVibrant;
-
   const SquareDisplayData = [
     { label: "Artist", data: artistName },
     { label: "Albums", data: numberOfAlbum },
     { label: "Fans", data: fans },
   ];
 
-  console.log(albums);
-
   return (
-    <Layout backgroundColor={backgroundColor!}>
+    <Layout>
       <Container>
         <NavBar />
         <Title>{artistName}</Title>

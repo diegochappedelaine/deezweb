@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import styled from "styled-components";
 
+import { useAppContext } from "provider/AppProvider";
 import useFetch from "helpers/useFetch";
 import { formatTime, useInnerWidth } from "utils";
 import { usePalette } from "react-palette";
@@ -22,11 +23,10 @@ import "react-h5-audio-player/src/styles.scss";
 
 import { ITrack } from "index.d";
 
-const Layout = styled.div<{ backgroundColor: string }>`
+const Layout = styled.div`
   width: 100vw;
   min-height: 100vh;
   height: 100%;
-  background: ${({ backgroundColor }) => backgroundColor};
 `;
 
 const TrackPage: React.FC = () => {
@@ -34,18 +34,32 @@ const TrackPage: React.FC = () => {
   const history = useHistory();
   const innerWidth = useInnerWidth();
   const [trackIsFavorite, setTrackIsFavorite] = useState(isFavorite(id));
+  const { setLoadingBackgroundColor, loadingBackgroundColor } = useAppContext();
 
   const { data: track } = useFetch<ITrack>(
     `https://api.deezer.com/track/${id}`
   );
 
-  const albumCover = track?.album.cover_big;
+  const albumCover = track?.album?.cover_big;
 
   const {
     data: colorData,
     loading,
     error,
   } = usePalette(albumCover || "#ffffff");
+
+  const backgroundColor = error ? loadingBackgroundColor : colorData.lightMuted,
+    albumWrapperColor = error ? "lightgrey" : colorData.lightVibrant;
+
+  useEffect(() => {
+    if (!loading) {
+      if (backgroundColor) {
+        setLoadingBackgroundColor!(backgroundColor!);
+        console.log(backgroundColor);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loading]);
 
   if (!track || loading) return null;
 
@@ -61,9 +75,6 @@ const TrackPage: React.FC = () => {
     previewListenUrl = track.preview,
     link = track.link;
 
-  const backgroundColor = error ? "#181201" : colorData.lightMuted,
-    albumWrapperColor = error ? "lightgrey" : colorData.lightVibrant;
-
   const SquareDisplayData = [
     { label: "BPM", data: bpm ? bpm : "/" },
     { label: "Duration", data: duration },
@@ -71,7 +82,7 @@ const TrackPage: React.FC = () => {
   ];
 
   return (
-    <Layout backgroundColor={backgroundColor!}>
+    <Layout>
       <Container>
         <NavBar style={{ marginBottom: 64 }} />
         <Wrapper>

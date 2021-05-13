@@ -1,9 +1,11 @@
+import { useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { usePalette } from "react-palette";
 import styled from "styled-components";
 
 import { formatTime } from "utils";
 import useFetch from "helpers/useFetch";
+import { useAppContext } from "provider/AppProvider";
 
 import TrackList from "components/TrackList/TrackList";
 import NavBar from "components/NavBar";
@@ -12,11 +14,10 @@ import Footer from "components/Footer/Footer";
 
 import { IAlbum } from "index.d";
 
-const Container = styled.div<{ backgroundColor: string }>`
+const Container = styled.div`
   width: 100vw;
   min-height: 100vh;
   height: 100%;
-  background: ${({ backgroundColor }) => backgroundColor};
   display: flex;
   box-shadow: 0 0 3px 0 rgb(0 0 0 / 20%);
 `;
@@ -59,6 +60,7 @@ const Title = styled.h1<{ onClick?: any }>`
 const AlbumPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const history = useHistory();
+  const { setLoadingBackgroundColor, loadingBackgroundColor } = useAppContext();
 
   const { data: album } = useFetch<IAlbum>(
     `https://api.deezer.com/album/${id}`
@@ -72,7 +74,17 @@ const AlbumPage: React.FC = () => {
     error,
   } = usePalette(albumCover || "#FFFFFF");
 
-  const backgroundColor = error ? "#181201" : colorData.lightMuted,
+  useEffect(() => {
+    if (!loading) {
+      if (backgroundColor) {
+        setLoadingBackgroundColor!(backgroundColor!);
+        console.log(backgroundColor);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loading]);
+
+  const backgroundColor = error ? loadingBackgroundColor : colorData.lightMuted,
     albumWrapperColor = error ? "lightgrey" : colorData.lightVibrant,
     trackListColor = error ? "darkgrey" : colorData.muted;
 
@@ -97,7 +109,7 @@ const AlbumPage: React.FC = () => {
   ];
 
   return (
-    <Container backgroundColor={backgroundColor!}>
+    <Container>
       <MainWrapper>
         <NavBar
           style={{
