@@ -45,7 +45,7 @@ export interface IAlbum {
   cover_xl: string;
   md5: string;
   genre_id: number;
-  genres: IGenre[];
+  genres: { data: IGenre[] };
   label: string;
   nb_tracks: number;
   duration: number;
@@ -60,6 +60,7 @@ export interface IAlbum {
   explicit_content_cover: ExplicitContentCoverEnum;
   contributors: IArtist[];
   artist: IArtist;
+  tracks: { data: ITrack[] };
 }
 
 export interface ITrack {
