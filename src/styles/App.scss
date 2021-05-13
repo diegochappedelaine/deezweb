@@ -2,14 +2,25 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap");
 
+html {
+  font-size: 62.5%;
+}
+
 body {
   margin: 0;
   padding: 0;
-  height: 100vh;
-  width: 100vw;
+  min-height: 100vh;
+  min-width: 100vw;
   background: #121212;
   color: white;
   font-family: "Roboto", sans-serif;
-  display: grid;
-  place-items: center;
+}
+
+.rhap_container {
+  border-radius: 16px;
+}
+
+.rhap_progress-container,
+.rhap_volume-container {
+  user-select: none !important;
 }

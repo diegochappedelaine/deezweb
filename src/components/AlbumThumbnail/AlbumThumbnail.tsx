@@ -6,7 +6,10 @@ import { usePalette } from "react-palette";
 
 import { ITrack } from "index.d";
 
-const Thumbnail = styled.div`
+const Thumbnail = styled.div<{
+  backgroundColor: string;
+  flexDirection: "row" | "row-reverse";
+}>`
   display: flex;
   position: relative;
   ${({ backgroundColor, flexDirection }) => `
@@ -84,7 +87,7 @@ const AlbumThumbnail: React.FC<IAlbumThumbnail> = ({
 
   const { data, loading, error } = usePalette(track.album.cover_xl);
 
-  if (loading) return null;
+  if (loading || !data) return null;
 
   const backgroundColor = error ? "#181201" : data.lightMuted,
     color = error ? "white" : data.vibrant;
@@ -92,7 +95,7 @@ const AlbumThumbnail: React.FC<IAlbumThumbnail> = ({
   return (
     <Thumbnail
       flexDirection={isCoverReversed ? "row" : "row-reverse"}
-      backgroundColor={backgroundColor}
+      backgroundColor={backgroundColor!}
     >
       {/* <RoundedButton /> */}
       <Cover

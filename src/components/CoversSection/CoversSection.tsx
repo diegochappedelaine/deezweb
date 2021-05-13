@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Element } from "react-scroll";
 
 const AlbumsDisplay = styled.section`
   @media (min-width: 1200px) {
@@ -9,7 +10,11 @@ const AlbumsDisplay = styled.section`
 `;
 
 const CoversSection: React.FC = ({ children }) => {
-  return <AlbumsDisplay>{children}</AlbumsDisplay>;
+  return (
+    <Element name="coverSection">
+      <AlbumsDisplay>{children}</AlbumsDisplay>
+    </Element>
+  );
 };
 
 export default CoversSection;

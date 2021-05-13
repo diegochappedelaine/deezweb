@@ -8,7 +8,7 @@ export const sortOptions = [
   { value: "RANKING", label: "by rank" },
 ];
 
-const SelectInput = () => {
+const SelectInput: React.FC = () => {
   const [selectedValue, setSelectedValue] = useState(sortOptions[0].value);
 
   const handleChange = (e: React.FormEvent) => {

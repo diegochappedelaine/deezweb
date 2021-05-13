@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const TextInput = () => {
+const TextInput: React.FC = () => {
   const [text, setText] = useState<string>("");
 
   const onChangeHandler = (e: React.FormEvent) => {
