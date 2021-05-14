@@ -20,8 +20,10 @@ const HomePage: React.FC = () => {
   const innerWidth = useInnerWidth();
   const [firstFetch, setFirstFetch] = useState<boolean>(true);
 
+  const tracksDisplayed = 14;
+
   const { fetchInfo, data: tracks } = fetchData<ITrack[]>(
-    `https://api.deezer.com/search?q=${search}&order=${sort}&limit=14`
+    `https://api.deezer.com/search?q=${search}&order=${sort}&limit=${tracksDisplayed}`
   );
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -48,6 +50,8 @@ const HomePage: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search, sort]);
 
+  const arrayOfPairedBooleans = generateArrayOfPairedBoolean(tracksDisplayed);
+
   return (
     <main>
       <HeroBanner handleSubmit={handleSubmit} />
@@ -59,7 +63,7 @@ const HomePage: React.FC = () => {
               track={track}
               isCoverReversed={
                 innerWidth > 1200
-                  ? generateArrayOfPairedBoolean(14)[index]
+                  ? arrayOfPairedBooleans[index]
                   : index % 2 === 0
               }
             />

@@ -3,8 +3,10 @@ import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import { formatTime } from "utils";
 import { usePalette } from "react-palette";
+import { handleFavorites, isFavorite } from "helpers/handleFavorites";
 
 import { Label, Cover, Link } from "./styled";
+import { RoundedButton } from "components/Buttons";
 
 import { ITrack } from "index.d";
 
@@ -57,13 +59,17 @@ const AlbumThumbnail: React.FC<IAlbumThumbnail> = ({
       flexDirection={isCoverReversed ? "row" : "row-reverse"}
       backgroundColor={backgroundColor!}
     >
-      {/* <RoundedButton /> */}
       <Cover
         src={coverUrl}
         alt={albumName}
         onClick={() => history.push(`/album/${albumId}`)}
       />
       <Label color={color}>
+        <RoundedButton
+          isCoverReversed={isCoverReversed}
+          onClick={() => handleFavorites(trackId.toString())}
+          isFavorite={isFavorite(trackId.toString())}
+        />
         <h2 style={{ marginBottom: 8 }}>
           <Link onClick={() => history.push(`/track/${trackId}`)}>
             {trackName}
