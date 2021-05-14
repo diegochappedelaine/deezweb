@@ -22,6 +22,8 @@ function useFetch() {
           );
           return preFetchData.json();
         });
+        // an async/await iteration of dataFetch wont return an array of data, but an array of promise
+        // I solve this using Promise.all
         const payload = (await Promise.all(detailsData)).map(
           (track: ITrack) => ({
             title: track.title,

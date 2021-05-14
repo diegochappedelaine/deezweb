@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+// This custom hook allow me to manipulate jsx condtionally with user's sreen width
 const useInnerWidth = () => {
   const [width, setWidth] = useState(window.innerWidth);
 

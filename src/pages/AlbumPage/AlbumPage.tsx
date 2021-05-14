@@ -11,25 +11,9 @@ import FadeIn from "components/FadeIn";
 import TrackList from "components/TrackList/TrackList";
 import AlbumCover from "components/AlbumCover/AlbumCover";
 import Footer from "components/Footer/Footer";
+import { Container, MainWrapper } from "./styled";
 
 import { IAlbum } from "index.d";
-
-const Container = styled.div`
-  height: 100%;
-  display: flex;
-`;
-
-const MainWrapper = styled.div`
-  display: flex;
-  padding: 0 24px;
-  width: 100%;
-  margin-top: 24px;
-  justify-content: space-around;
-
-  @media (max-width: 900px) {
-    flex-direction: column;
-  }
-`;
 
 const Title = styled.h1<{ onClick?: any }>`
   color: white;
@@ -75,7 +59,6 @@ const AlbumPage: React.FC = () => {
     if (!loading) {
       if (backgroundColor) {
         setLoadingBackgroundColor!(backgroundColor!);
-        console.log(backgroundColor);
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

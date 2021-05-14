@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import styled from "styled-components";
 
 import useFetch from "helpers/useFetch";
 import { usePalette } from "react-palette";
@@ -11,6 +10,7 @@ import AlbumCover from "components/AlbumCover";
 import { DeezerButton } from "components/Buttons";
 import Footer from "components/Footer";
 import {
+  Layout,
   Container,
   Title,
   DiscographyContainer,
@@ -18,11 +18,6 @@ import {
 } from "./styled";
 
 import { IArtist, IAlbum } from "index.d";
-
-const Layout = styled.div`
-  width: 100vw;
-  min-height: 100vh;
-`;
 
 const ArtistPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -49,7 +44,6 @@ const ArtistPage: React.FC = () => {
     if (!loading) {
       if (backgroundColor) {
         setLoadingBackgroundColor!(backgroundColor!);
-        console.log(backgroundColor);
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -103,7 +97,7 @@ const ArtistPage: React.FC = () => {
       </Container>
       <Footer
         SquareDisplayData={SquareDisplayData}
-        artist={{ artistPicture, artistId, artistName }}
+        artist={{ artistPicture: artistPicture!, artistId, artistName }}
         style={{ position: "fixed" }}
       />
     </Layout>

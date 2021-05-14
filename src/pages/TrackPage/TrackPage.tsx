@@ -54,7 +54,6 @@ const TrackPage: React.FC = () => {
     if (!loading) {
       if (backgroundColor) {
         setLoadingBackgroundColor!(backgroundColor!);
-        console.log(backgroundColor);
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

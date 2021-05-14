@@ -3,7 +3,7 @@ import AlbumPage from "./AlbumPage";
 import ArtistPage from "./ArtistPage";
 import TrackPage from "./TrackPage";
 import NotFoundPage from "./NotFoundPage";
-import FavoritesPage from "./FavoritesPage";
+import FavoritesPage from "./FavoritePage";
 
 export {
   HomePage,

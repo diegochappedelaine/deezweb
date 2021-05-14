@@ -18,7 +18,9 @@ function useFetchLazy<T = unknown>(url: string) {
     }
     setLoading(false);
   };
-
+  // This variant of my useFetch hook is inspired by the one from appolo/graphql
+  // data is not fetch when I execute useFetchLazy() but when I execute const {fetchInfo} = useFetchLazy();
+  // This trick allow me to execute a hook conditionally (in a useEffect or after data has been fetched)
   return { error, loading, data, fetchInfo };
 }
 
