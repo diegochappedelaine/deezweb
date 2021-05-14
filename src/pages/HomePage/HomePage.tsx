@@ -48,6 +48,7 @@ const HomePage: React.FC = () => {
   useEffect(() => {
     if (search && sort) {
       fetchInfo();
+      // Does not scroll to results on first load
       if (firstFetch) {
         setFirstFetch(false);
       } else {
