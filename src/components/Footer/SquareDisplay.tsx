@@ -8,6 +8,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  cursor: default;
 
   &:not(:last-child) {
     border-right: 1px solid lightgrey;

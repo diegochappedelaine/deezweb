@@ -103,7 +103,7 @@ const TrackPage: React.FC<ITrackPage> = ({ track, id }) => {
 
               <h3>
                 <span>Title: </span>
-                <span>{trackTitle}</span>
+                <span className="nolink">{trackTitle}</span>
               </h3>
               <AudioPlayer src={previewListenUrl} showSkipControls={false} />
               <ButtonContainer>

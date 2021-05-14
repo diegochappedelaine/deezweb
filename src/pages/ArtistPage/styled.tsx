@@ -22,11 +22,7 @@ const Title = styled.h1`
   color: #fff;
   transition: 0.2s all ease;
   text-shadow: 3px 3px rgba(0, 0, 0, 0.3);
-
-  &:hover {
-    cursor: pointer;
-    text-shadow: 3px 3px rgba(0, 0, 0, 0.8);
-  }
+  cursor: default;
 `;
 
 const DiscographyContainer = styled.section`

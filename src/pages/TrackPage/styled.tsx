@@ -22,9 +22,15 @@ const InformationsWrapper = styled.article`
   display: flex;
   flex-direction: column;
 
+  .nolink {
+    text-decoration: none !important;
+    cursor: default !important;
+  }
+
   span {
     &:first-child {
       font-weight: 100;
+      cursor: default;
     }
 
     &:last-child:hover {

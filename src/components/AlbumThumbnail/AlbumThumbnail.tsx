@@ -74,12 +74,14 @@ const AlbumThumbnail: React.FC<IAlbumThumbnail> = ({
           <Link onClick={() => history.push(`/track/${trackId}`)}>
             {trackName}
           </Link>
-          {" - "}
+          <span style={{ cursor: "default" }}>{" - "}</span>
           <Link onClick={() => history.push(`/artist/${artistId}`)}>
             {artist}
           </Link>
         </h2>
-        <p style={{ marginBottom: 8 }}>{formatTime(duration)}</p>
+        <p style={{ marginBottom: 8, cursor: "default" }}>
+          {formatTime(duration)}
+        </p>
         <h3 style={{ marginBottom: 8 }}>
           <Link onClick={() => history.push(`/album/${albumId}`)}>
             {albumName}

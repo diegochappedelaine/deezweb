@@ -93,7 +93,9 @@ const AlbumPage: React.FC = () => {
       <MainWrapper>
         <div>
           <FadeIn>
-            <Title style={{ fontWeight: 500 }}>{albumTitle}</Title>
+            <Title style={{ fontWeight: 500, cursor: "default" }}>
+              {albumTitle}
+            </Title>
             <Title
               style={{ fontWeight: 300, color: "#f7f7f7" }}
               onClick={() => history.push(`/artist/${artistId}`)}

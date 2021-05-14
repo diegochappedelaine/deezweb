@@ -32,6 +32,7 @@ const HeroBannerContainer = styled.header`
   h2 {
     margin-bottom: 3rem;
     font-size: 2rem;
+    cursor: default;
   }
 `;
 
