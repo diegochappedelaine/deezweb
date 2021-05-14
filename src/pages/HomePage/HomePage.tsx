@@ -16,8 +16,7 @@ import { sortOptions } from "components/SearchForm/SelectInput";
 import { ITrack } from "index.d";
 
 const HeroBanner = styled.header`
-  height: 100vh;
-  width: 100vw;
+  min-height: calc(100vh - 62px);
   display: flex;
   flex-direction: column;
   align-items: center;

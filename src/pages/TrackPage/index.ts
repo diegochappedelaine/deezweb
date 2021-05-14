@@ -1,3 +1,3 @@
-import TrackPage from "./TrackPage";
+import TrackPage from "./TrackPageLayout";
 
 export default TrackPage;

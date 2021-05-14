@@ -44,7 +44,7 @@ const NotFoundPage: React.FC = () => {
     <Layout>
       <h1>Oops !</h1>
       <p>
-        Something went wrong, we can't seem to find the page you ar looking for
+        Something went wrong, we can't seem to find the page you are looking for
         ...
       </p>
       <p>You'll be redirected to Homepage in {seconds} seconds</p>

@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 const corsProxyUrl = "https://mycorsproxyapp.herokuapp.com/";
 
 function useFetchLazy<T = unknown>(url: string) {
+  const history = useHistory();
   const [error, setError] = useState();
   const [loading, setLoading] = useState<boolean>(false);
   const [data, setData] = useState<T>();
@@ -12,6 +14,7 @@ function useFetchLazy<T = unknown>(url: string) {
     try {
       const data = await fetch(corsProxyUrl + url);
       const result = await data.json();
+      if (result.error) return history.push("/404");
       setData(result.data);
     } catch (error) {
       setError(error);

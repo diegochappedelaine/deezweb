@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
 import { useAppContext } from "provider/AppProvider";
-import useFetch from "helpers/useFetch";
 import { formatTime, useInnerWidth } from "utils";
 import { usePalette } from "react-palette";
 import { isFavorite, handleFavorites } from "helpers/handleFavorites";
@@ -28,18 +27,29 @@ const Layout = styled.div`
   height: 100%;
 `;
 
-const TrackPage: React.FC = () => {
-  const { id } = useParams<{ id: string }>();
+interface ITrackPage {
+  track: ITrack;
+  id: string;
+}
+
+const TrackPage: React.FC<ITrackPage> = ({ track, id }) => {
   const history = useHistory();
   const innerWidth = useInnerWidth();
   const [trackIsFavorite, setTrackIsFavorite] = useState(isFavorite(id));
   const { setLoadingBackgroundColor, loadingBackgroundColor } = useAppContext();
 
-  const { data: track } = useFetch<ITrack>(
-    `https://api.deezer.com/track/${id}`
-  );
-
-  const albumCover = track?.album?.cover_big;
+  const duration = formatTime(track.duration),
+    releaseDate = new Date(track.release_date).toLocaleDateString(),
+    bpm = track.bpm,
+    artistPicture = track.artist.picture_big,
+    artistId = track.artist.id,
+    artistName = track.artist.name,
+    albumTitle = track.album.title,
+    albumId = track.album.id,
+    trackTitle = track.title,
+    previewListenUrl = track.preview,
+    link = track.link,
+    albumCover = track.album.cover_big;
 
   const {
     data: colorData,
@@ -59,19 +69,7 @@ const TrackPage: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading]);
 
-  if (!track || loading) return null;
-
-  const duration = formatTime(track.duration),
-    releaseDate = new Date(track.release_date).toLocaleDateString(),
-    bpm = track.bpm,
-    artistPicture = track.artist.picture_big,
-    artistId = track.artist.id,
-    artistName = track.artist.name,
-    albumTitle = track.album.title,
-    albumId = track.album.id,
-    trackTitle = track.title,
-    previewListenUrl = track.preview,
-    link = track.link;
+  if (loading) return null;
 
   const SquareDisplayData = [
     { label: "BPM", data: bpm ? bpm : "/" },
