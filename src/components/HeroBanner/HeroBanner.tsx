@@ -27,12 +27,19 @@ const HeroBannerContainer = styled.header`
     margin-bottom: 2rem;
 
     cursor: pointer;
+    text-shadow: 3px 3px rgba(0, 0, 0, 0.3);
+
+    &:hover {
+      text-shadow: 3px 3px rgba(0, 0, 0, 0.8);
+    }
   }
 
   h2 {
     margin-bottom: 3rem;
     font-size: 2rem;
     cursor: default;
+    font-weight: 300;
+    text-shadow: 3px 3px rgba(0, 0, 0, 0.3);
   }
 `;
 
