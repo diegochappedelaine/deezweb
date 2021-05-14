@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import styled from "styled-components";
 
 import fetchData from "helpers/useFetchLazy";
 import {
@@ -8,20 +7,12 @@ import {
   scrollToView,
 } from "utils";
 
-import SearchForm from "components/SearchForm/SearchForm";
+import HeroBanner from "components/HeroBanner";
 import CoverSection from "components/CoversSection";
 import AlbumThumbnail from "components/AlbumThumbnail";
 import { sortOptions } from "components/SearchForm/SelectInput";
 
 import { ITrack } from "index.d";
-
-const HeroBanner = styled.header`
-  min-height: calc(100vh - 62px);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
 
 const HomePage: React.FC = () => {
   const [search, setSearch] = useState<string>("Kanye West");
@@ -59,10 +50,7 @@ const HomePage: React.FC = () => {
 
   return (
     <main>
-      <HeroBanner>
-        <h1>Deezweb</h1>
-        <SearchForm onSubmit={handleSubmit} />
-      </HeroBanner>
+      <HeroBanner handleSubmit={handleSubmit} />
       {tracks && (
         <CoverSection>
           {tracks.map((track, index) => (
@@ -71,7 +59,7 @@ const HomePage: React.FC = () => {
               track={track}
               isCoverReversed={
                 innerWidth > 1200
-                  ? generateArrayOfPairedBoolean(tracks.length)[index]
+                  ? generateArrayOfPairedBoolean(14)[index]
                   : index % 2 === 0
               }
             />
