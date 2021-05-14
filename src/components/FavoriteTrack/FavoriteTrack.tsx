@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import { IFavoritesTracks } from "index.d";
@@ -11,6 +11,8 @@ import { DeezerButton, RemoveFavoriteButton } from "components/Buttons";
 import FavoriteTrackInformations from "./FavoriteTrackInformations";
 
 import { Delete, DeezerLogo } from "assets/svg";
+
+import WaitLoader from "assets/Ellipsis-1s-200px.gif";
 
 const Container = styled.li<{ backgroundColor: string }>`
   list-style-type: none;
@@ -85,6 +87,16 @@ const ButtonWrapper = styled.div`
   }
 `;
 
+const Placeholder = styled.div`
+  list-style-type: none;
+  background: lightgrey;
+  border-radius: 16px;
+  box-shadow: 0 0 3px 0 rgb(0 0 0 / 60%);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+`;
+
 interface IFavoriteTracks {
   onRemove: () => void;
   track: IFavoritesTracks;
@@ -106,11 +118,28 @@ const FavoriteTrack: React.FC<IFavoriteTracks> = ({
   const history = useHistory();
   const innerWidth = useInnerWidth();
   const { data: colorData, loading, error } = usePalette(cover);
+  const [differedLoading, setDifferedLoading] = useState(true);
 
   const backgroundColor = error ? "#181201" : colorData.lightMuted,
     albumWrapperColor = error ? "lightgrey" : colorData.lightVibrant;
 
-  if (loading) return null;
+  useEffect(() => {
+    if (!loading) {
+      const loadingDelayedAppearance = setTimeout(() => {
+        setDifferedLoading(false);
+      }, 300);
+      return () => clearTimeout(loadingDelayedAppearance);
+    }
+  }, [loading]);
+
+  if (differedLoading)
+    return (
+      <Placeholder>
+        <AlbumWrapper backgroundColor={"lightgrey"}>
+          <AlbumCoverImage src={WaitLoader} alt="loading" />
+        </AlbumWrapper>
+      </Placeholder>
+    );
 
   return (
     <Container backgroundColor={backgroundColor!}>
